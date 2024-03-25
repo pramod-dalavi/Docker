@@ -1,0 +1,17 @@
+version: '2'
+services:
+  db:
+    image: microsoft/windowsservercore
+    command: powershell /c sleep 3600
+
+  web:
+    # image: microsoft/windowsservercore
+    build: .
+    command: ping db
+    depends_on:
+      - "db"
+
+networks:
+  default:
+    external:
+      name: nat
